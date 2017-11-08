@@ -1,7 +1,6 @@
 // Knows all about which page is loaded and responds to action to load new page.
-var createStore = require('pure-flux').createStore;
-var dispatch = require('pure-flux').dispatch;
-var parsequery = require('functionfoundry/fn/parsequery');
+var {createStore, dispatch} = require('pure-flux');
+var parsequery = require('formula/fn/parsequery');
 
 function readLocation(state) {
   var path = window.location.pathname,
@@ -9,13 +8,16 @@ function readLocation(state) {
 
   return {
     title: document.title,
-    path,
-    search,
+    path: window.location.pathname,
+    search: window.location.search,
+    hash: window.location.hash,
     query: search && search.length > 0 ? parsequery(window.location.search) : {}
   };
 }
 
 var store = createStore( 'location', ( state={ path: null }, action ) => {
+
+  if (!state.path) return readLocation();
 
   switch (action.type) {
   case 'openPath':

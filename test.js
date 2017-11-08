@@ -66,10 +66,12 @@ var pageNotFound = React.createClass({
 
 var {createStore, dispatch, promiseAction} = require('pure-flux')
 
-let loadComponent = (cmp) => (...args) => promiseAction('loadContent', cmp)
+let loadComponent = require('./src/index').loadContent;
 
-var Router = require('./src/index')({
-  routes: [{
+var router= require('./src/index')
+var { location, replaceRoutes, loadContent, loadRoutes } = require('./src/index')
+
+loadRoutes([{
     path: '/',
     load: loadComponent(testComponent)
   }, {
@@ -84,17 +86,12 @@ var Router = require('./src/index')({
   }, {
     path: '*',
     load: loadComponent(pageNotFound)
-  }]
-})
-
-var { location, router, Link, Container, replaceRoutes } = Router
+  }])
 
 test( 'Exports are correct type', function(t) {
-  t.plan(4)
+  t.plan(2)
   t.equal(typeof location, 'object')
   t.equal(typeof router, 'object')
-  t.equal(typeof Link, 'function')
-  t.equal(typeof Container, 'function')
 })
 
 test( 'Location includes valid exports', function(t) {
@@ -105,88 +102,21 @@ test( 'Location includes valid exports', function(t) {
 })
 
 test( 'Router includes valid exports', function(t) {
-  t.plan(1)
-  t.equal(router.name, 'router')
+  t.plan(2)
+  t.equal(typeof loadContent, 'function')
+  t.equal(typeof router.loadContent, 'function')
 })
-
-
-  test( 'Link renders correctly', function(t) {
-  t.plan(1)
-  var str = ReactDom.renderToStaticMarkup(<Link to="/bar" />)
-  t.equal(str, '<a href="/bar"></a>')
-})
-
-
-test( 'Empty container renders...well empty', function(t) {
-  t.plan(1)
-  var str = ReactDom.renderToStaticMarkup(<Container />)
-  t.equal(str, '')
-})
-
 
 test( 'location.open(path) works correctly', function* (t) {
-  t.plan(8)
+  t.plan(2)
 
-  var result = yield location.open('/buckets/456/settings')
-
-  var str = ReactDom.renderToStaticMarkup(<Container />)
-  t.equal(str, '<div>path: /buckets/456/settings. params: {&quot;account_id&quot;:&quot;456&quot;}. search: </div>')
 
   var result = yield location.open('/buckets/123')
 
   t.equal( window.location.pathname, '/buckets/123')
 
-  var str = ReactDom.renderToStaticMarkup(<Container />)
-  t.equal(str, '<div>path: /buckets/123. params: {&quot;account_id&quot;:&quot;123&quot;}. search: </div>')
+  var result = yield location.open('/buckets/123#456')
 
-  var result = yield location.open('/buckets')
+  t.equal( window.location.pathname, '/buckets/123#456')
 
-  var str = ReactDom.renderToStaticMarkup(<Container />)
-  t.equal(str, '<div>path: /buckets. params: {}. search: </div>')
-
-  // default (not found) page is loaded.
-  var result = yield location.open('/foo')
-  var str = ReactDom.renderToStaticMarkup(<Container />)
-  t.equal(str, '<div>not found</div>')
-
-  var oneStore = createStore("One", { getInitialState: () => 1 })
-
-  // query strings work correctly
-  var result = yield location.open('/?q=test')
-  var str = ReactDom.renderToStaticMarkup(<Container />)
-  t.equal(str, '<div>path: /. params: {}. search: ?q=test</div>')
-
-  var newStore = createStore('CountStore', (state=1) => 1)
-
-  yield goBack();
-
-  t.equal( window.location.pathname, '/foo')
-  var str = ReactDom.renderToStaticMarkup(<Container />)
-  t.equal(str, '<div>not found</div>')
-
-})
-
-test( 'check replace routes', function* (t) {
-  t.plan(2)
-
-  replaceRoutes([{
-    path: '/',
-    load: loadComponent(testComponent)
-  }, {
-    path: '/foo',
-    load: loadComponent(testComponent)
-  }, {
-    path: '*',
-    load: loadComponent(pageNotFound)
-  }])
-
-
-  var result = yield location.open('/foo')
-  var str = ReactDom.renderToStaticMarkup(<Container />)
-  t.equal(str, '<div>path: /foo. params: {}. search: </div>')
-
-  var result = yield location.open('/buckets')
-  var str = ReactDom.renderToStaticMarkup(<Container />)
-  t.equal(str, '<div>not found</div>')
-
-})
+});
