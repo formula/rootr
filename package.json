@@ -1,6 +1,6 @@
 {
   "name": "pure-flux-router",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A simple router for pure-flux, based on history.pushState.",
   "repository": {
     "type": "git",
@@ -38,6 +38,6 @@
     "pure-flux": "^1.1.0"
   },
   "dependencies": {
-    "formula": "^2.1.7"
+    "formula": "^2.1.6"
   }
 }
