@@ -1,18 +1,9 @@
-let routes;
+// Copyright JC Fisher @ 2017
+let {promiseAction, dispatch} = require('pure-flux');
 
-function router(opts) {
-  return replaceRoutes(opts.routes)
-}
-
-function replaceRoutes(r) {
-  routes = r;
-  router.router = require('./router')(routes)
-  return router;
-}
-
+let router = require('./router');
 router.location = require('./location');
-router.Link = require('./link');
-router.Container = require('./container');
-router.replaceRoutes = replaceRoutes;
+router.loadRoutes = (routes) => dispatch('loadRoutes', routes);
+router.loadContent = (cmp) => () => promiseAction('loadContent', cmp);
 
 module.exports = router;

@@ -1,7 +1,7 @@
 {
   "name": "pure-flux-router",
-  "version": "1.3.2",
-  "description": "A simple router for pure-flux",
+  "version": "2.0.1",
+  "description": "A simple router for pure-flux, based on history.pushState.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/PureFlux/pure-flux-router.git"
@@ -12,7 +12,7 @@
     "test": "babel-node test"
   },
   "keywords": [
-    "flux"
+    "flux", "router", "single page apps"
   ],
   "homepage": "https://github.com/PureFlux/pure-flux-router#readme",
   "devDependencies": {
@@ -32,14 +32,12 @@
     "react": "^15.3.2",
     "react-addons-pure-render-mixin": "^15.3.2"
   },
-  "author": "Peter W Moresi",
+  "author": "JC Fisher",
   "license": "MIT",
   "peerDependencies": {
-    "pure-flux": "^1.1.0",
-    "react": "^15.3.2",
-    "react-addons-pure-render-mixin": "^15.3.2"
+    "pure-flux": "^1.1.0"
   },
   "dependencies": {
-    "functionfoundry": "^0.11.0"
+    "formula": "^2.1.6"
   }
 }

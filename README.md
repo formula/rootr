@@ -4,13 +4,11 @@
 
 ## Overview
 
-A router for single page applications which supports:
+A router for single page applications:
 
-1. Uses history api. No abstractions, zero overhead.
-2. Routes defined with a paths similar to express.
-3. Route content is loaded async. Works with webpack's code splitting.
-4. Includes `Link` and `Container` components for React.
-5. Routes can be changed at runtime.
+1. Wraps DOM APIs for window and history.
+2. Routes defined with a paths, similar to express.
+3. Content loaded async. Works with webpack.
 
 ## Usage
 
@@ -18,46 +16,23 @@ A router for single page applications which supports:
 
 ```js
 var {promiseAction} = require('pure-flux')
+var {loadContent, loadRoutes} = require('pure-flux-router')
 
-var loadContent = (p) =>
-p
-.then( (module) => promiseAction('loadContent', module) )
-.catch( error => dispatch('__LAST_ERROR__', error) )
-
-var { router, location } = require('pure-flux-router')({
-  routes: [{
+let routes = [{
     path: '/',
-    load: () => loadContent( System.import('./pages/home') )
+    load: loadContent( System.import('./pages/home') )
   }, {
     path: '/buckets',
-    load: () => loadContent( System.import('./pages/buckets') )
+    load: loadContent( System.import('./pages/buckets') )
   }, {
     path: '/bucket/:bucket_id',
-    load: (bucket_id) => loadContent( System.import('./pages/buckets') )
+    load: loadContent( System.import('./pages/buckets') )
   } {
     path: '*',
-    load: () => loadContent( System.import('./pages/404') )
+    load: loadContent( System.import('./pages/404') )
   }]
-})
-```
 
-### Link Component
-
-A link component to switch pages.
-
-```js
-import {Link} from 'pure-flux-router'
-<Link to="/buckets" />
-<Link type="button" to="/buckets" />
-```
-
-### Container Component
-
-This will render the content async loaded by the route action.
-
-```js
-import {Container} from 'pure-flux-router'
-<Container />
+loadRoutes( routes )
 ```
 
 ### Open path programmically
@@ -76,9 +51,9 @@ location.redirect('/buckets')
 Change the routes.
 
 ```js
-Router.replaceRoutes([{
+loadRoutes([{
   path: '/',
-  load: () => loadContent( System.import('./pages/home') )
+  load: loadContent( System.import('./pages/home') )
 }])
 ```
 
