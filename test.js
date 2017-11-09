@@ -66,26 +66,19 @@ var pageNotFound = React.createClass({
 
 var {createStore, dispatch, promiseAction} = require('pure-flux')
 
-let loadComponent = require('./src/index').loadContent;
-
 var router= require('./src/index')
-var { location, replaceRoutes, loadContent, loadRoutes } = require('./src/index')
+var { location, replaceRoutes, loadContent, loadRoutes, promiseContent } = require('./src/index')
+
 
 loadRoutes([{
     path: '/',
-    load: loadComponent(testComponent)
+    load: promiseContent(testComponent)
   }, {
-    path: '/buckets',
-    load: loadComponent(testComponent)
-  }, {
-    path: '/buckets/:account_id',
-    load: loadComponent(testComponent)
-  }, {
-    path: '/buckets/:account_id/settings',
-    load: loadComponent(testComponent)
+    path: '/admin',
+    load: promiseContent(testComponent)
   }, {
     path: '*',
-    load: loadComponent(pageNotFound)
+    load: promiseContent(pageNotFound)
   }])
 
 test( 'Exports are correct type', function(t) {
@@ -102,9 +95,10 @@ test( 'Location includes valid exports', function(t) {
 })
 
 test( 'Router includes valid exports', function(t) {
-  t.plan(2)
+  t.plan(3)
   t.equal(typeof loadContent, 'function')
   t.equal(typeof router.loadContent, 'function')
+  t.equal(3, router.getState().routes.length)
 })
 
 test( 'location.open(path) works correctly', function* (t) {

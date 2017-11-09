@@ -7,8 +7,8 @@
 A router for single page applications:
 
 1. Wraps DOM APIs for window and history.
-2. Routes defined with a paths, similar to express.
-3. Content loaded async. Works with webpack.
+2. Routes defined with paths, similar to express.
+3. Content loaded async. Works with code splitting.
 
 ## Usage
 
@@ -20,16 +20,10 @@ var {loadContent, loadRoutes} = require('pure-flux-router')
 
 let routes = [{
     path: '/',
-    load: loadContent( System.import('./pages/home') )
-  }, {
-    path: '/buckets',
-    load: loadContent( System.import('./pages/buckets') )
-  }, {
-    path: '/bucket/:bucket_id',
-    load: loadContent( System.import('./pages/buckets') )
+    load: () => System.import('./pages/home').then( cmp => loanContent(cmp) )
   } {
     path: '*',
-    load: loadContent( System.import('./pages/404') )
+    load: () => System.import('./pages/error_not_found').then( cmp => loanContent(cmp) )
   }]
 
 loadRoutes( routes )

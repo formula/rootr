@@ -1,6 +1,6 @@
 {
   "name": "pure-flux-router",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A simple router for pure-flux, based on history.pushState.",
   "repository": {
     "type": "git",
@@ -24,18 +24,16 @@
     "babel-preset-react": "^6.11.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
-    "immutable": "^3.7.5",
     "react-dom": "^15.3.2",
     "tape": "^4.2.2",
     "tape-async": "^2.1.1",
     "pure-flux": "^1.1.0",
-    "react": "^15.3.2",
-    "react-addons-pure-render-mixin": "^15.3.2"
+    "react": "^15.3.2"
   },
   "author": "JC Fisher",
   "license": "MIT",
   "peerDependencies": {
-    "pure-flux": "^1.1.0"
+    "pure-flux": "^1.2.0"
   },
   "dependencies": {
     "formula": "^2.1.6"
