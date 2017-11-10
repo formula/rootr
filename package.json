@@ -1,6 +1,6 @@
 {
   "name": "rootr",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Router for single page app.",
   "repository": {
     "type": "git",
@@ -36,9 +36,9 @@
   "author": "JC Fisher",
   "license": "MIT",
   "peerDependencies": {
+    "fluxury": "3.0.0",
   },
   "dependencies": {
-    "fluxury": "3.0.0",
     "formula": "^2.1.6"
   }
 }

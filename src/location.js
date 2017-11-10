@@ -15,9 +15,9 @@ function readLocation(state) {
   };
 }
 
-var store = createStore( 'location', ( state={}, action ) => {
+var store = createStore( 'location', ( state=false, action ) => {
 
-  if (!state.pathname) return readLocation();
+  if (!state) return readLocation();
 
   switch (action.type) {
   case 'openPath':
