@@ -1,5 +1,5 @@
 // Knows all about which page is loaded and responds to action to load new page.
-var {createStore, dispatch} = require('pure-flux');
+var {createStore, dispatch} = require('fluxury');
 var parsequery = require('formula/fn/parsequery');
 
 function readLocation(state) {

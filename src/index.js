@@ -1,5 +1,5 @@
 // Copyright JC Fisher @ 2017
-let {promiseAction, dispatch} = require('pure-flux');
+let {promiseAction, dispatch} = require('fluxury');
 
 let router = require('./router');
 router.location = require('./location');

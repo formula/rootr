@@ -1,5 +1,5 @@
-var createStore = require('pure-flux').createStore;
-var dispatch = require('pure-flux').dispatch;
+var createStore = require('fluxury').createStore;
+var dispatch = require('fluxury').dispatch;
 var pathToRegexp = require('./pathToRegexp');
 let pathRegexps = {};
 let locationToken = require('./location').dispatchToken;
