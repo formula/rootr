@@ -1,10 +1,10 @@
-# pure-flux-router
+# rootr
 
-[![CircleCI](https://circleci.com/gh/PureFlux/pure-flux-router.svg?style=svg)](https://circleci.com/gh/WebsiteHQ/pure-flux-router)
+[![CircleCI](https://circleci.com/gh/formula/rootr.svg?style=svg)](https://circleci.com/gh/formula/rootr)
 
 ## Overview
 
-A router for single page applications:
+A router for single page apps:
 
 1. Wraps DOM APIs for window and history.
 2. Routes defined with paths, similar to express.
@@ -12,18 +12,17 @@ A router for single page applications:
 
 ## Usage
 
-### Router Setup
+### Setup
 
 ```js
-var {promiseAction} = require('pure-flux')
-var {loadContent, loadRoutes} = require('pure-flux-router')
+var {loadContent, loadRoutes} = require('rootr')
 
 let routes = [{
     path: '/',
-    load: () => System.import('./pages/home').then( cmp => loanContent(cmp) )
+    load: () => System.import('./pages/home')
   } {
     path: '*',
-    load: () => System.import('./pages/error_not_found').then( cmp => loanContent(cmp) )
+    load: () => System.import('./pages/error_not_found')
   }]
 
 loadRoutes( routes )
@@ -32,7 +31,7 @@ loadRoutes( routes )
 ### Open path programmically
 
 ```js
-import {location} from 'pure-flux-router'
+import {location} from 'rootr'
 location.open('/buckets/1')
 ```
 Use `redirect` to change the URL without adding an entry to the history state.
@@ -50,7 +49,3 @@ loadRoutes([{
   load: loadContent( System.import('./pages/home') )
 }])
 ```
-
-## Final thoughts
-
-Experimental. Untested in wide variety of browsers.

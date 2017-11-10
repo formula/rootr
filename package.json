@@ -1,10 +1,10 @@
 {
-  "name": "pure-flux-router",
-  "version": "2.0.2",
-  "description": "A simple router for pure-flux, based on history.pushState.",
+  "name": "rootr",
+  "version": "0.0.3",
+  "description": "Router for single page app.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PureFlux/pure-flux-router.git"
+    "url": "git+https://github.com/formula/rootr.git"
   },
   "main": "./lib/index.js",
   "scripts": {
@@ -12,9 +12,12 @@
     "test": "babel-node test"
   },
   "keywords": [
-    "flux", "router", "single page apps"
+    "flux",
+    "router",
+    "single page app",
+    "spa"
   ],
-  "homepage": "https://github.com/PureFlux/pure-flux-router#readme",
+  "homepage": "https://github.com/formula/rootr#readme",
   "devDependencies": {
     "babel-cli": "^6.1.2",
     "babel-core": "^6.1.2",
@@ -24,11 +27,11 @@
     "babel-preset-react": "^6.11.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
+    "pure-flux": "^1.1.0",
+    "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "tape": "^4.2.2",
-    "tape-async": "^2.1.1",
-    "pure-flux": "^1.1.0",
-    "react": "^15.3.2"
+    "tape-async": "^2.1.1"
   },
   "author": "JC Fisher",
   "license": "MIT",

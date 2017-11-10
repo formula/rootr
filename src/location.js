@@ -3,21 +3,21 @@ var {createStore, dispatch} = require('pure-flux');
 var parsequery = require('formula/fn/parsequery');
 
 function readLocation(state) {
-  var path = window.location.pathname,
+  var pathname = window.location.pathname,
       search = window.location.search;
 
   return {
     title: document.title,
-    path: window.location.pathname,
+    pathname: window.location.pathname,
     search: window.location.search,
     hash: window.location.hash,
     query: search && search.length > 0 ? parsequery(window.location.search) : {}
   };
 }
 
-var store = createStore( 'location', ( state={ path: null }, action ) => {
+var store = createStore( 'location', ( state={}, action ) => {
 
-  if (!state.path) return readLocation();
+  if (!state.pathname) return readLocation();
 
   switch (action.type) {
   case 'openPath':

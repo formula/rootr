@@ -5,6 +5,5 @@ let router = require('./router');
 router.location = require('./location');
 router.loadRoutes = (routes) => dispatch('loadRoutes', routes);
 router.loadContent = (cmp) => dispatch('loadContent', cmp);
-router.promiseContent = (cmp) => () => promiseAction('loadContent', cmp);
 
 module.exports = router;
