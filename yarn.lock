@@ -1040,7 +1040,7 @@ flagged-respawn@^0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/flagged-respawn/-/flagged-respawn-0.3.2.tgz#ff191eddcd7088a675b2610fffc976be9b8074b5"
 
-fluxury@3.0.0:
+fluxury@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/fluxury/-/fluxury-3.0.0.tgz#0478ce0f314c62f957be8c860284e2e042663cbe"
 
@@ -2164,10 +2164,6 @@ promise@^7.1.1:
   resolved "https://registry.yarnpkg.com/promise/-/promise-7.1.1.tgz#489654c692616b8aa55b0724fa809bb7db49c5bf"
   dependencies:
     asap "~2.0.3"
-
-pure-flux@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/pure-flux/-/pure-flux-1.1.0.tgz#92dc6c651206e02cff98f9a9419fb9619b16b04e"
 
 qs@~6.2.0:
   version "6.2.1"

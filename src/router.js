@@ -4,7 +4,8 @@ var pathToRegexp = require('./pathToRegexp');
 let pathRegexps = {};
 let locationToken = require('./location').dispatchToken;
 let locationStore = require('./location');
-let isfunction = require('formula/fn/isfunction')
+let isobject = require('formula/fn/isobject');
+let isfunction = require('formula/fn/isfunction');
 
 // Return the first matching route.
 function match(routes=[], path) {
@@ -31,6 +32,11 @@ module.exports = createStore( 'router', (state={ routes: [] }, action, waitFor) 
   waitFor([locationToken]);
 
   var {routes, content} = state;
+
+  if (action.type === 'loadContent') {
+    // console.log('loadContent in router', state, action)
+    return Object.assign({}, state, { content: action.data });
+  }
 
   if (action.type === 'loadRoutes'){
     routes = action.data;
@@ -72,23 +78,21 @@ module.exports = createStore( 'router', (state={ routes: [] }, action, waitFor) 
 
   // console.log('CHECK', route, typeof route.load)
   if (found && route.component) {
-    // console.log('COMPONENT', route.component)
+     // console.log('COMPONENT', route.component)
     content = route.component;
   } else if (found && route && route.load) {
-    // console.log('ASYNC', route)
+     // console.log('ASYNC', route)
     // run the action method defined by the router
-    if (route.load.then) {
-      // console.log("THEN", route)
-      route.load.then( (content) => dispatch( {
-        type: 'loadContent',
-        content,
-        params,
-        args,
-        route
-      } ) );
-    } else if (isfunction(route.load)) {
+    content = route.load;
+
+    if (isfunction(content)) {
       // console.log("THUNK", route, typeof route.load)
       content = route.load(params);
+    }
+
+    if (isobject(content) && content.then) {
+      // console.log("THEN", route)
+      content.then( (cmp) => dispatch('loadContent', cmp) );
     }
   }
 

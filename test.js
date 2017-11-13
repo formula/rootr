@@ -70,8 +70,9 @@ var testComponent3 = (props) => <div>3</div>
 var testComponent4 = (props) => <div>4</div>
 var pageNotFound = (props) => <div>not found</div>
 
-var { createStore, dispatch, promiseAction } = require('pure-flux')
+var { createStore, dispatch, promiseAction, subscribe } = require('fluxury')
 
+//subscribe((state, action) => console.log('action', action))
 var router= require('./src/index')
 var { location, replaceRoutes, loadContent, loadRoutes, promiseContent } = require('./src/index')
 
@@ -81,7 +82,7 @@ loadRoutes([{
   load: Promise.resolve(testComponent)
 }, {
   path: '/admin',
-  load: () => testComponent
+  load: () => Promise.resolve(testComponent)
 }, {
   path: '/admin2',
   component: testComponent2
@@ -130,6 +131,7 @@ test( 'location.open(path) works correctly', function* (t) {
   t.equal( window.location.search, '?foo=1')
   t.equal( window.location.hash, '#456')
 
+  var result = yield location.open('/')
 
   var rs = router.getState;
   var result = yield location.open('/admin')
