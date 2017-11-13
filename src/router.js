@@ -83,16 +83,18 @@ module.exports = createStore( 'router', (state={ routes: [] }, action, waitFor) 
   } else if (found && route && route.load) {
     // console.log('ASYNC', route, content)
     // run the action method defined by the router
-    content = route.load;
+    let loader = route.load;
 
-    if (isfunction(content)) {
+    if (isfunction(loader)) {
       // console.log("THUNK", route, typeof route.load)
-      content = route.load(params);
+      loader = route.load(params);
     }
 
-    if (isobject(content) && content.then) {
+    if (isfunction(loader)) {
+      content = loader;
+    } else if (isobject(loader) && loader.then) {
       // console.log("THEN", route)
-      content.then( (cmp) => dispatch('loadContent', cmp) );
+      loader.then( (cmp) => dispatch('loadContent', cmp) );
     }
   }
 
