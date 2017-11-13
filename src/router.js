@@ -35,7 +35,7 @@ module.exports = createStore( 'router', (state={ routes: [] }, action, waitFor) 
 
   if (action.type === 'loadContent') {
     // console.log('loadContent in router', state, action)
-    return Object.assign({}, state, { content: action.data });
+    return Object.assign({}, state, { content: isobject(action.data) && action.data.default ? action.data.default : action.data });
   }
 
   if (action.type === 'loadRoutes'){
@@ -78,10 +78,10 @@ module.exports = createStore( 'router', (state={ routes: [] }, action, waitFor) 
 
   // console.log('CHECK', route, typeof route.load)
   if (found && route.component) {
-     // console.log('COMPONENT', route.component)
+    // console.log('COMPONENT', route.component)
     content = route.component;
   } else if (found && route && route.load) {
-     // console.log('ASYNC', route)
+    // console.log('ASYNC', route, content)
     // run the action method defined by the router
     content = route.load;
 

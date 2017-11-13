@@ -1,6 +1,6 @@
 {
   "name": "rootr",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Router for single page app.",
   "repository": {
     "type": "git",

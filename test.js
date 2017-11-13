@@ -72,7 +72,7 @@ var pageNotFound = (props) => <div>not found</div>
 
 var { createStore, dispatch, promiseAction, subscribe } = require('fluxury')
 
-//subscribe((state, action) => console.log('action', action))
+// subscribe((state, action) => console.log('action', action))
 var router= require('./src/index')
 var { location, replaceRoutes, loadContent, loadRoutes, promiseContent } = require('./src/index')
 
@@ -82,10 +82,10 @@ loadRoutes([{
   load: Promise.resolve(testComponent)
 }, {
   path: '/admin',
-  load: () => Promise.resolve(testComponent)
+  load: () => Promise.resolve(testComponent) // Promise resolves to component
 }, {
   path: '/admin2',
-  component: testComponent2
+  load: () => Promise.resolve({ default: testComponent2 }) // Promise resolves to ES6 default.
 }, {
   path: '/admin3',
   component: testComponent3
