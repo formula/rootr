@@ -1,4 +1,5 @@
 var createStore = require('fluxury').createStore;
+var promiseAction = require('fluxury').promiseAction;
 var dispatch = require('fluxury').dispatch;
 var pathToRegexp = require('./pathToRegexp');
 let pathRegexps = {};
@@ -33,6 +34,12 @@ module.exports = createStore( 'router', (state={ routes: [] }, action, waitFor) 
 
   var {routes, content} = state;
 
+  // combine current routes with additional routes
+  if (action.type === 'addRoutes'){
+    var moreRoutes = state.concat(action.data)
+    return promiseAction( 'loadRoutes',  moreRoutes)
+  }
+  
   if (action.type === 'loadContent') {
     // console.log('loadContent in router', state, action)
     return Object.assign({}, state, { content: isobject(action.data) && action.data.default ? action.data.default : action.data });
