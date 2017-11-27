@@ -1,6 +1,6 @@
 {
   "name": "rootr",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "Router for single page app.",
   "repository": {
     "type": "git",
@@ -25,7 +25,6 @@
     "babel-polyfill": "^6.16.0",
     "babel-preset-es2015": "^6.1.2",
     "babel-preset-react": "^6.11.1",
-    "fluxury": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "react": "^15.3.2",
@@ -36,9 +35,9 @@
   "author": "JC Fisher",
   "license": "MIT",
   "peerDependencies": {
-    "fluxury": "3.0.0"
   },
   "dependencies": {
+    "fluxury": "3.0.0",
     "formula": "^2.1.6"
   }
 }
