@@ -39,7 +39,7 @@ var store = createStore( 'location', ( state=false, action ) => {
 });
 
 window.addEventListener('popstate', function(event) {
-  store.redirect( window.location.pathname );
+  store.redirect( window.location.pathname + window.location.search + window.location.hash );
 });
 
 module.exports = store;
