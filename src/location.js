@@ -22,6 +22,7 @@ var store = createStore( 'location', ( state=false, action ) => {
   switch (action.type) {
   case 'openPath':
   case 'redirectPath':
+  case 'windowPopState':
     return readLocation();
   }
 
@@ -39,7 +40,7 @@ var store = createStore( 'location', ( state=false, action ) => {
 });
 
 window.addEventListener('popstate', function(event) {
-  store.redirect( window.location.pathname + window.location.search + window.location.hash );
+  dispatch('windowPopState')
 });
 
 module.exports = store;
