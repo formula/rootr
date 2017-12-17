@@ -45,25 +45,21 @@ module.exports = createStore( 'router', (state={ routes: [] }, action, waitFor) 
   var ls = locationStore.getState();
   var pathname = ls.pathname;
 
-  // console.log('current path', pathname)
+  console.log('current path', pathname)
 
   // Match routes
   var found = match( routes, pathname );
 
   if (!found) {
-    // console.warn("not found", pathname, routes);
+     console.warn("not found", pathname, routes);
     return state;
   }
 
   var {re, route} = found;
 
-  if (state.route && state.route === route) {
-    // console.log('same route')
-    return state;
-  }
 
   if (!route) {
-    // console.warn('no route!');
+    console.warn('no route!');
     return state;
   }
   // extract parameters
@@ -75,6 +71,11 @@ module.exports = createStore( 'router', (state={ routes: [] }, action, waitFor) 
       paramNames.reduce( (acc, key, i) => { acc[key.substring(1)] = args[i]; return acc; }, {}) :
       {};
 
+
+  if (state.route && state.route === route && state.params === params) {
+    console.log('same route and params')
+    return state;
+  }
 
   // console.log('CHECK', route, typeof route.load)
   if (found && route.component) {

@@ -74,6 +74,9 @@ loadRoutes([{
   path: '/admin4',
   component: testComponent4
 }, {
+    path: '/page/:num',
+    component: testComponent4
+}, {
   path: '*',
   component: testComponent
 }])
@@ -95,11 +98,11 @@ test( 'Router includes valid exports', function(t) {
   t.plan(3)
   t.equal(typeof loadContent, 'function')
   t.equal(typeof router.loadContent, 'function')
-  t.equal(6, router.getState().routes.length)
+  t.equal(7, router.getState().routes.length)
 })
 
 test( 'location.open(path) works correctly', function* (t) {
-  t.plan(12)
+  t.plan(16)
 
 
   var result = yield location.open('/admin')
@@ -131,6 +134,13 @@ test( 'location.open(path) works correctly', function* (t) {
   t.equal( rs().route.path, '/admin4' );
   t.equal( rs().content, testComponent4 );
 
+  var result = yield location.open('/page/1')
+  t.equal( rs().route.path, '/page/:num' );
+  t.deepEqual( rs().params, { num: '1' })
+
+  var result = yield location.open('/page/2')
+  t.equal( rs().route.path, '/page/:num' );
+  t.deepEqual( rs().params, { num: '2' })
 
 });
 
