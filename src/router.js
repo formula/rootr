@@ -28,6 +28,10 @@ function match(routes=[], path) {
 //   A list of routes that specify a URL path and an action that must return a promise to the page content.
 module.exports = createStore( 'router', (state={ routes: [] }, action, waitFor) => {
 
+  if (false == (action.type == 'loadRoutes' || action.type == 'loadContent' || action.type == 'openPath' || action.type == 'redirectPath' || action.type == 'windowPopState')) {
+    return state;
+  }
+
   // routes depends on location store being updated first!
   waitFor([locationToken]);
 
@@ -45,13 +49,13 @@ module.exports = createStore( 'router', (state={ routes: [] }, action, waitFor) 
   var ls = locationStore.getState();
   var pathname = ls.pathname;
 
-  console.log('current path', pathname)
+  // console.log('current path', pathname)
 
   // Match routes
   var found = match( routes, pathname );
 
   if (!found) {
-     console.warn("not found", pathname, routes);
+    console.warn("not found", pathname, routes);
     return state;
   }
 
@@ -73,7 +77,7 @@ module.exports = createStore( 'router', (state={ routes: [] }, action, waitFor) 
 
 
   if (state.route && state.route === route && state.params === params) {
-    console.log('same route and params')
+    // console.log('same route and params')
     return state;
   }
 
