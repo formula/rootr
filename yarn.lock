@@ -1040,9 +1040,9 @@ flagged-respawn@^0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/flagged-respawn/-/flagged-respawn-0.3.2.tgz#ff191eddcd7088a675b2610fffc976be9b8074b5"
 
-fluxury@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/fluxury/-/fluxury-3.0.0.tgz#0478ce0f314c62f957be8c860284e2e042663cbe"
+fluxury@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/fluxury/-/fluxury-3.1.0.tgz#875b5b1a7009b25d786d33a5dc4a7d0608cedf6d"
 
 for-in@^0.1.5:
   version "0.1.6"
@@ -1070,9 +1070,9 @@ form-data@~2.0.0:
     combined-stream "^1.0.5"
     mime-types "^2.1.11"
 
-formula@^2.1.6:
-  version "2.1.6"
-  resolved "https://registry.yarnpkg.com/formula/-/formula-2.1.6.tgz#195b06280331803c3e616e78284d110e492f21e9"
+formula@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/formula/-/formula-2.3.1.tgz#79cae5e996a9a9c1a7123101e39164779dfaedcf"
 
 fs-exists-sync@^0.1.0:
   version "0.1.0"
